@@ -1,18 +1,18 @@
 package com.priyanshtechnology.hrms.base.exception;
 
-
-import com.priyanshtechnology.hrms.base.response.ApiResponse;
-import org.springframework.http.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestControllerAdvice
+import com.priyanshtechnology.hrms.base.response.ApiResponse;
+
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiResponse<Object>> handleRuntime(RuntimeException ex) {
-        return new ResponseEntity<>(
-                new ApiResponse<>(false, ex.getMessage(), null),
-                HttpStatus.BAD_REQUEST
-        );
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleNotFound(
+            ResourceNotFoundException ex) {
+
+        return ResponseEntity.status(404)
+                .body(new ApiResponse<>(404, ex.getMessage(), null));
     }
 }
