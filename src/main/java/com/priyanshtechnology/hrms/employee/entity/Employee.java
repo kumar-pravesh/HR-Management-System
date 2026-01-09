@@ -1,10 +1,6 @@
 package com.priyanshtechnology.hrms.employee.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employees")
@@ -14,69 +10,71 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long empId;
 
-    private String name;
+    @Column(nullable = false, unique = true)
     private String email;
-    private String department;
-    private String designation;
-    private double salary;
 
     private boolean active = true;
 
-	public Long getEmpId() {
-		return empId;
-	}
+    // ========= MAPPINGS =========
 
-	public void setEmpId(Long empId) {
-		this.empId = empId;
-	}
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EmployeePersonalDetails personalDetails;
 
-	public String getName() {
-		return name;
-	}
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EmployeeJobDetails jobDetails;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EmployeeContactDetails contactDetails;
 
-	public String getEmail() {
-		return email;
-	}
+    // ========= GETTERS / SETTERS =========
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public Long getEmpId() {
+        return empId;
+    }
 
-	public String getDepartment() {
-		return department;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setDepartment(String department) {
-		this.department = department;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getDesignation() {
-		return designation;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public double getSalary() {
-		return salary;
-	}
+    public EmployeePersonalDetails getPersonalDetails() {
+        return personalDetails;
+    }
 
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
+    public void setPersonalDetails(EmployeePersonalDetails personalDetails) {
+        this.personalDetails = personalDetails;
+        if (personalDetails != null)
+            personalDetails.setEmployee(this);
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public EmployeeJobDetails getJobDetails() {
+        return jobDetails;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public void setJobDetails(EmployeeJobDetails jobDetails) {
+        this.jobDetails = jobDetails;
+        if (jobDetails != null)
+            jobDetails.setEmployee(this);
+    }
 
-   
+    public EmployeeContactDetails getContactDetails() {
+        return contactDetails;
+    }
+
+    public void setContactDetails(EmployeeContactDetails contactDetails) {
+        this.contactDetails = contactDetails;
+        if (contactDetails != null)
+            contactDetails.setEmployee(this);
+    }
 }
