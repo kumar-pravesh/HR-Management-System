@@ -1,4 +1,6 @@
-package com.priyanshtechnology.hrms.base.response;
+package com.priyanshtechnology.hrms.base.exception;
+
+ 
 
 public class ApiResponse<T> {
 
@@ -36,5 +38,6 @@ public class ApiResponse<T> {
 		this.data = data;
 	}
 
-   
+ 
+    
 }
