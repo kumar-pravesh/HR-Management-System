@@ -82,7 +82,7 @@ public class EssController {
         );
     }
 
-    // ================= UPDATE PERSONAL DETAILS =================
+    // ================= UPDATE PERSONAL DETAILS =================     
     @PutMapping("/{empId}/update-personal")
     public ResponseEntity<ApiResponse<EmployeeProfileResponseDTO>> updatePersonalDetails(
             @PathVariable Long empId,
