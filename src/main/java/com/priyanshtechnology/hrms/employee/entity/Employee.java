@@ -1,5 +1,7 @@
 package com.priyanshtechnology.hrms.employee.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -17,12 +19,15 @@ public class Employee {
 
     // ========= MAPPINGS =========
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private EmployeePersonalDetails personalDetails;
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private EmployeeJobDetails jobDetails;
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private EmployeeContactDetails contactDetails;
 

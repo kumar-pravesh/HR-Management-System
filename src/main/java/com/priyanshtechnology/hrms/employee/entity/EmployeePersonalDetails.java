@@ -1,6 +1,9 @@
 package com.priyanshtechnology.hrms.employee.entity;
 
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +21,7 @@ public class EmployeePersonalDetails {
 
     @OneToOne
     @JoinColumn(name = "emp_id", nullable = false)
+    @JsonBackReference
     private Employee employee;
 
     // GETTERS / SETTERS
